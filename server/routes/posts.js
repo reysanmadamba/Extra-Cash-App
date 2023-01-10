@@ -14,9 +14,12 @@ const create = (request, response) => {
     }
   );
 };
-
+//create
+//r
+//update
+//delete
 const fetch = (request, response) => {
-  connection.query("SELECT * FROM posts", (err, results) => {
+  connection.query("SELECT * FROM posts ORDER BY date_created DESC", (err, results) => {
     if (err) throw err;
     response.status(200).json(results.rows);
   });
@@ -25,7 +28,7 @@ const fetch = (request, response) => {
 const fetchById = (request, response) => {
   const id = request.params.id;
   connection.query(
-    "SELECT * FROM posts WHERE ID = $1",
+    "SELECT * FROM posts WHERE id = $1",
     [id],
     (err, results) => {
       if (err) throw err;
@@ -59,10 +62,23 @@ const deletePost = (request, response) => {
   });
 };
 
+const getPostByUserId = (request, response) => {
+  const id = request.params.id;
+  connection.query(
+    "SELECT * FROM posts WHERE user_id = $1 ORDER BY date_created DESC",
+    [id],
+    (err, results) => {
+      if (err) throw err;
+      response.status(200).json(results.rows);
+    }
+  );
+};
+
 module.exports = {
   create,
   fetch,
   fetchById,
   update,
   deletePost,
+  getPostByUserId,
 };
