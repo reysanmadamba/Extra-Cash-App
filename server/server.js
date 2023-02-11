@@ -33,6 +33,7 @@ app.post("/posts/create", posts.create);
 app.delete("/posts/:id", posts.deletePost);
 app.put("/posts/:id", posts.update);
 app.get("/posts/user/:id", posts.getPostByUserId);
+app.put("/posts/mark-as-read/:id", posts.markAsRead);
 
 // ROUTES FOR AUTHENTICATION
 app.post("/users/login", auth.login);

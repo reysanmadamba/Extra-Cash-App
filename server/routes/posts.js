@@ -1,10 +1,10 @@
 const { connection } = require("../config/config");
 
 const create = (request, response) => {
-  const { title, description, price, user_id } = request.body;
+  const { title, description, price, user_id, status } = request.body;
   connection.query(
-    "INSERT INTO posts (title, description, price, user_id) VALUES ($1, $2, $3, $4)",
-    [title, description, price, user_id],
+    "INSERT INTO posts (title, description, price, user_id, status) VALUES ($1, $2, $3, $4, $5)",
+    [title, description, price, user_id, status],
     (err, results) => {
       if (err) throw err;
       response.status(201).json({
@@ -19,10 +19,13 @@ const create = (request, response) => {
 //update
 //delete
 const fetch = (request, response) => {
-  connection.query("SELECT * FROM posts ORDER BY date_created DESC", (err, results) => {
-    if (err) throw err;
-    response.status(200).json(results.rows);
-  });
+  connection.query(
+    "SELECT * FROM posts WHERE status='Open' ORDER BY date_created DESC",
+    (err, results) => {
+      if (err) throw err;
+      response.status(200).json(results.rows);
+    }
+  );
 };
 
 const fetchById = (request, response) => {
@@ -65,8 +68,20 @@ const deletePost = (request, response) => {
 const getPostByUserId = (request, response) => {
   const id = request.params.id;
   connection.query(
-    "SELECT * FROM posts WHERE user_id = $1 ORDER BY date_created DESC",
+    "SELECT * FROM posts WHERE user_id = $1 AND status='Open' ORDER BY date_created DESC",
     [id],
+    (err, results) => {
+      if (err) throw err;
+      response.status(200).json(results.rows);
+    }
+  );
+};
+
+const markAsRead = (request, response) => {
+  const id = request.params.id;
+  connection.query(
+    "UPDATE posts SET status = $2 WHERE ID = $1",
+    [id, "Archived"],
     (err, results) => {
       if (err) throw err;
       response.status(200).json(results.rows);
@@ -81,4 +96,5 @@ module.exports = {
   update,
   deletePost,
   getPostByUserId,
+  markAsRead,
 };
