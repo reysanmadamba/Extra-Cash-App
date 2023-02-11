@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "react-query";
 import axios from "axios";
 import AppWrapper from "../components/AppWrapper";
+import { redirect, useNavigate } from "react-router-dom";
 const CreatePost = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const title = useRef("");
   const description = useRef("");
   const price = useRef("");
@@ -22,14 +24,15 @@ const CreatePost = () => {
       title: title.current.value,
       description: description.current.value,
       price: price.current.value,
+      status: "Open",
     };
     const response = await axios.post(
       "http://localhost:8080/posts/create",
       formData
     );
-    if(response.status === 201) {
-      queryClient.invalidateQueries('POSTS')
-    }
+    queryClient.invalidateQueries({ queryKey: "POSTS" });
+    queryClient.invalidateQueries({ queryKey: "UserPosts" });
+    navigate("/dashboard");
     console.log(response);
   };
 
