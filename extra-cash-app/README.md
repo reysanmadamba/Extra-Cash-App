@@ -1,4 +1,4 @@
-<p><h2>Job App for Employer and Employee</h2></p>
+<p><h2>EXTRA CASH APP</h2></p>
 <p>A web-based application designed to help employers and employees connect with each other. The app allows employers to create a profile, post job listings, and receive inquiries from potential employees. Employees can create their own profiles, view job postings, and make inquiries to employers.</p>
 <p>Features</p>
 <ul>
@@ -17,16 +17,9 @@
   <li>NPM</li>
   <li>PostgreSQL</li>
 </ul>
-<p>Installing</p>
-<p>Clone the repository to your local machine:</p>
-<p>bash</p>
-<p>Copy code</p>
-<p>git clone https://github.com/YOUR-GITHUB-REPO-LINK.git</p>
-<p>Navigate to the project directory:</p>
-<p>bash</p>
-<p>Copy code</p>
-<p>cd job-app-for-employer-employee</p>
-<p>Built With</p>
+
+<p>git clone [https://github.com/YOUR-GITHUB-REPO-LINK.git](https://github.com/reysanmadamba/Extra-Cash-App)</p>
+
 <ul>
   <li>JavaScript</li>
   <li>React</li>
