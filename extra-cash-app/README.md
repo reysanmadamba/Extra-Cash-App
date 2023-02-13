@@ -18,7 +18,7 @@
   <li>PostgreSQL</li>
 </ul>
 
-<p>git clone [https://github.com/YOUR-GITHUB-REPO-LINK.git](https://github.com/reysanmadamba/Extra-Cash-App)</p>
+<p>git clone (https://github.com/reysanmadamba/Extra-Cash-App)</p>
 
 <ul>
   <li>JavaScript</li>
